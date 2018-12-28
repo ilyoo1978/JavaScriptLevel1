@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bulls&Cows</title>
+</head>
+<body>
+<div class="results" id="x"></div>
+<script>
+    let counter = 1; guess =[];
+    function getRandNum(min, max) {
+        return  Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    // leng - количество цифр
+    function getNum(leng = 4) {
+        let num = [], temp;
+        for (let i = 0; i <= leng -1; i++) {
+            temp = getRandNum(0, 9);
+            if ((temp == 0 && num.length == 0) || (num.indexOf(temp+"") > -1)) {
+                i--;
+            } else {num.push(temp+'')}
+        }
+        return num;
+    }
+   //str - сообщение, leng - кол-во цифр
+    function getGuess(str = 'введите число', leng = 4) {
+        let guess, arrGuess;
+        do {
+            set = new Set();
+            guess = +prompt(str + '\nвсего цифр - ' + leng +'\nдля выхода нажмите 1');
+            if (guess == 1){break;}
+            arrGuess = guess +'';
+            arrGuess = arrGuess.split('');
+            for (dig of arrGuess) {
+                set.add(dig);
+            }
+        } while (typeof guess !== "number" || arrGuess.length !== leng || set.size < arrGuess.length);
+    return arrGuess;
+    }
+    function check() {
+        bulls = 0;
+        cows = 0;
+        guess.forEach(function (dig) {
+            if (num.indexOf(dig) === guess.indexOf(dig)) {
+                bulls++;
+            }
+            else if (num.indexOf(dig) > -1) {
+                cows++;
+            }
+        })
+    }
+    let num = getNum();//через аргумент можно задать кол-во знаков, по умолчанию 4
+    for(let i=0; i <10; i++){
+        guess = getGuess('введите число из неповторяющихся цифр');//arg1-сообщение, arg2-количество знаков
+        check();
+        if (num.join('') == guess.join('')){alert('YEAHHH!!!!!'); break;}
+        alert(`Вы ввели ${guess.join('')}\nзагаданное число - ${num.join('')}\nБыков - ${bulls} , коров -${cows}\nосталось ${10 - counter} попыток `);
+        counter++;
+        if(counter > 10){
+            alert('NOOOO!!!!!');
+        }
+    }
+
+
+
+
+</script>
+</body>
+
+</html>
