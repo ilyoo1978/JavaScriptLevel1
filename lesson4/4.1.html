@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+   <script>
+    const arr ={};
+    let a = prompt("enter a number under 999");
+   function splitNum(num){
+        num = num.split('');
+       console.log(num);
+       switch (num.length){
+            case 0 :
+                return arr;
+            case 1:
+                arr.единицы = num[0] ;
+                break;
+            case 2:
+                arr.единицы = num[1];
+                arr.десятки = num[0];
+                break;
+            case 3:
+            arr.сотни = num[0];
+            arr.десятки = num[1];
+            arr.еденицы = num[2];
+            break;
+        }
+    }
+    splitNum(a);
+    console.log(arr);
+</script>
